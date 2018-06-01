@@ -1,6 +1,6 @@
 global:
   # The smarthost and SMTP sender used for mail notifications.
-  smtp_smarthost: 'relayhost.wh.reachlocal.com:25'
+  smtp_smarthost: 'relayhost:25'
   smtp_from: 'alertmanager@reachlocalservices.com'
   smtp_auth_username: 'alertmanager'
   smtp_auth_password: 'password'
