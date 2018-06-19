@@ -34,7 +34,7 @@ route:
 
   # If an alert has successfully been sent, wait 'repeat_interval' to
   # resend them.
-  repeat_interval: 3h 
+  repeat_interval: 1h 
 
   # A default receiver
   receiver: team-X-mails
@@ -80,13 +80,14 @@ route:
 # firing.
 # We use this to mute any warning-level notifications if the same alert is 
 # already critical.
+
 inhibit_rules:
-- source_match:
-    severity: 'critical'
-  target_match:
-    severity: 'warning'
-  # Apply inhibition if the alertname is the same.
-  equal: ['alertname', 'cluster', 'service']
+#- source_match:
+#    severity: 'critical'
+#  target_match:
+#    severity: 'warning'
+#  # Apply inhibition if the alertname is the same.
+#  equal: ['alertname', 'cluster', 'service']
 
 
 receivers:
