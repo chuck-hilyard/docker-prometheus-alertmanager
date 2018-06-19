@@ -34,5 +34,5 @@ receivers:
 - name: 'team-X-mails'
   email_configs:
   - to: 'chuck.hilyard@reachlocal.com'
-	  send_resolved: true
+    send_resolved: true
 
