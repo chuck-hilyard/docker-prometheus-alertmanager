@@ -33,5 +33,6 @@ route:
 receivers:
 - name: 'team-X-mails'
   email_configs:
+	  send_resolved: true
   - to: 'chuck.hilyard@reachlocal.com'
 
