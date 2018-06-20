@@ -28,5 +28,5 @@ receivers:
   email_configs:
   - to: 'chuck.hilyard@reachlocal.com'
     send_resolved: true
-		require_tls: false
+    require_tls: false
 
