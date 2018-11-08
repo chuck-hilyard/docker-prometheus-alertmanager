@@ -21,7 +21,7 @@ node('common')  {
   
 
   stage('Build') {
-    go get github.com/prometheus/alertmanager/cmd/amtool
+    sh "go get github.com/prometheus/alertmanager/cmd/amtool"
     sh "export GOOS=linux make build"
   }
 
