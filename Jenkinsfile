@@ -17,13 +17,11 @@ node('common')  {
       stash includes: 'Dockerfile', name: 'dockerfile'
       stash includes: '*.yml', name: 'yaml_files'
     }
-  }
-  
 
-  stage('Build') {
-    sh "go get github.com/prometheus/alertmanager/cmd/amtool"
-    sh "export GOOS=linux make build"
-  }
+    stage('Build') {
+      sh "go get github.com/prometheus/alertmanager/cmd/amtool"
+      sh "export GOOS=linux make build"
+    }
 
   catch(err) {
     currentBuild.result = "FAILURE"
