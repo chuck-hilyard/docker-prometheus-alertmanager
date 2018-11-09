@@ -6,8 +6,8 @@ node('common')  {
   println('Status: '+response.status)
   println('Response: '+response.content)
   def list = response.content.tokenize(",")
-  list.each { shit -> 
-    println("item: $shit")
+  list.each { it -> 
+    println("item: $it")
   }
   println('response is a '+response.content.getClass())
   println('list is a '+list.getClass())
