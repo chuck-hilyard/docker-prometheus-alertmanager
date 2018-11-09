@@ -5,7 +5,7 @@ node('common')  {
   println('Status: '+response.status)
   println('Response: '+response.content)
   response.content.each {
-    println('line: '+${it})
+    println('line: '+it)
   }
   /*
 	*AWS_ACCOUNT_NUMBER = sh(script: "curl http://consul:8500/v1/kv/${PROJECT_NAME}/config/AWS_ACCOUNT_NUMBER?raw", returnStdout: true).trim()
