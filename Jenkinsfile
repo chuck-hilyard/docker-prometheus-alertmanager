@@ -1,13 +1,11 @@
 node('common')  {
 	PROJECT_NAME = 'prometheus-alertmanager'
-  consul_url = "http://consul:8500/v1/kv/${PROJECT_NAME}/config?keys"
+  CONSUL_URL = "http://consul:8500/v1/kv/${PROJECT_NAME}/config?keys"
   def consul_map = [:]
-  def response = httpRequest consul_url
+  def response = httpRequest CONSUL_URL
   println('Status: '+response.status)
   println('Response: '+response.content)
-  response.content.each {
-    println('line: '+it)
-  }
+  println('URL: '+response.url)
   /*
 	*AWS_ACCOUNT_NUMBER = sh(script: "curl http://consul:8500/v1/kv/${PROJECT_NAME}/config/AWS_ACCOUNT_NUMBER?raw", returnStdout: true).trim()
 	*FQDN = sh(script: "curl http://consul:8500/v1/kv/${PROJECT_NAME}/config/FQDN?raw", returnStdout: true).trim()
