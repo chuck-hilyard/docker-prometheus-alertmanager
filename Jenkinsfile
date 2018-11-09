@@ -4,7 +4,9 @@ node('common')  {
   def response = httpRequest "http://consul:8500/v1/kv/${PROJECT_NAME}/config?keys"
   println('Status: '+response.status)
   println('Response: '+response.content)
-  println('class type:'+response.content.getClass())
+  response.content.each {
+    println('line: '+${it})
+  }
   /*
 	*AWS_ACCOUNT_NUMBER = sh(script: "curl http://consul:8500/v1/kv/${PROJECT_NAME}/config/AWS_ACCOUNT_NUMBER?raw", returnStdout: true).trim()
 	*FQDN = sh(script: "curl http://consul:8500/v1/kv/${PROJECT_NAME}/config/FQDN?raw", returnStdout: true).trim()
