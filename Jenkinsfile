@@ -29,7 +29,6 @@ node('docker-builds') {
 
   stage('Docker Build') {
 		unstash 'everything'
-    sh "go get github.com/prometheus/alertmanager/cmd/amtool"
     sh "docker build -t ${PROJECT_NAME}:${BRANCH} ."
     sh "docker tag ${PROJECT_NAME}:${BRANCH} ${AWS_ACCOUNT_NUMBER}.dkr.ecr.us-west-2.amazonaws.com/${PROJECT_NAME}-${FQDN_HYPHENATED}:${BRANCH}"
   }
