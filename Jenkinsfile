@@ -15,10 +15,7 @@ node('common')  {
       git branch: "${BRANCH}",
       url: "${github_repo}"
       checkout scm
-      stash includes: 'Dockerfile', name: 'dockerfile'
-      stash includes: 'doc/examples/simple.yml', name: 'simple_yaml'
-      stash includes: 'amtool', name: 'amtool'
-      stash includes: 'alertmanager', name: 'alertmanager'
+      stash includes: '**', name: 'everything'
     }
   }
 
@@ -31,10 +28,7 @@ node('common')  {
 node('docker-builds') {
 
   stage('Docker Build') {
-		unstash 'dockerfile'
-		unstash 'simple_yaml'
-		unstash 'amtool'
-    unstash 'alertmanager'
+		unstash 'everything'
     sh "docker build -t ${PROJECT_NAME}:${BRANCH} ."
     sh "docker tag ${PROJECT_NAME}:${BRANCH} ${AWS_ACCOUNT_NUMBER}.dkr.ecr.us-west-2.amazonaws.com/${PROJECT_NAME}-${FQDN_HYPHENATED}:${BRANCH}"
   }
