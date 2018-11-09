@@ -5,7 +5,8 @@ node('common')  {
   def response = httpRequest(contentType: 'APPLICATION_JSON', url: "${CONSUL_URL}")
   println('Status: '+response.status)
   println('Response: '+response.content)
-  def list = response.content.tokenize(",")
+  //def list = response.content.tokenize(",")
+  def list = response.content
   list.join(" ")
   list.each {
     println("item: $it")
