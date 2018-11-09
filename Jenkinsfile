@@ -15,13 +15,15 @@ node('common')  {
       git branch: "${BRANCH}", // <- this needs to be solved
       url: "${github_repo}"
       stash includes: 'Dockerfile', name: 'dockerfile'
-      stash includes: '*.yml', name: 'yaml_files'
+      stash includes: 'doc/examples/simple.yml', name: 'simple_yaml'
       stash includes: 'amtool', name: 'amtool'
+      stash includes: 'alertmanager', name: 'alertmanager'
     }
 
     stage('Build') {
-      sh "go get github.com/prometheus/alertmanager/cmd/amtool"
-      sh "export GOOS=linux make build"
+      print "in build, doing nada"
+      //sh "go get github.com/prometheus/alertmanager/cmd/amtool"
+      //sh "export GOOS=linux make build"
     }
   }
 
@@ -35,8 +37,9 @@ node('docker-builds') {
 
   stage('Docker Build') {
 		unstash 'dockerfile'
-		unstash 'yaml_files'
+		unstash 'simple_yaml'
 		unstash 'amtool'
+    unstash 'alertmanager'
     sh "docker build -t ${PROJECT_NAME}:${BRANCH} ."
     sh "docker tag ${PROJECT_NAME}:${BRANCH} ${AWS_ACCOUNT_NUMBER}.dkr.ecr.us-west-2.amazonaws.com/${PROJECT_NAME}-${FQDN_HYPHENATED}:${BRANCH}"
   }
