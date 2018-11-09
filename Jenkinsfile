@@ -1,6 +1,9 @@
 node('common')  {
 	PROJECT_NAME = 'prometheus-alertmanager'
-  def consul_vars = [:]
+  def consul_map = [:]
+  def response = httpRequest "http://consul:8500/v1/kv/${PROJECT_NAME}/config?recurse"
+  println('Status: '+response.status)
+  println('Response: '+response.content)
   /*
 	*AWS_ACCOUNT_NUMBER = sh(script: "curl http://consul:8500/v1/kv/${PROJECT_NAME}/config/AWS_ACCOUNT_NUMBER?raw", returnStdout: true).trim()
 	*FQDN = sh(script: "curl http://consul:8500/v1/kv/${PROJECT_NAME}/config/FQDN?raw", returnStdout: true).trim()
