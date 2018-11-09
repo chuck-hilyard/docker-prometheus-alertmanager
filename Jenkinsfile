@@ -19,12 +19,6 @@ node('common')  {
       stash includes: 'amtool', name: 'amtool'
       stash includes: 'alertmanager', name: 'alertmanager'
     }
-
-    stage('Build') {
-      print "in build, doing nada"
-      //sh "go get github.com/prometheus/alertmanager/cmd/amtool"
-      //sh "export GOOS=linux make build"
-    }
   }
 
   catch(err) {
