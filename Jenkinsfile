@@ -6,6 +6,7 @@ node('common')  {
   println('Status: '+response.status)
   println('Response: '+response.content)
   def list = response.content.tokenize(",")
+  list.join(" ")
   list.each {
     println("item: $it")
   }
