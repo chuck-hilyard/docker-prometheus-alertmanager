@@ -12,8 +12,9 @@ node('common')  {
 
   try {
     stage('Code Checkout') {
-      git branch: "${BRANCH}", // <- this needs to be solved
+      git branch: "${BRANCH}",
       url: "${github_repo}"
+      checkout scm
       stash includes: 'Dockerfile', name: 'dockerfile'
       stash includes: 'doc/examples/simple.yml', name: 'simple_yaml'
       stash includes: 'amtool', name: 'amtool'
