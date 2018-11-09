@@ -16,12 +16,12 @@ node('common')  {
       url: "${github_repo}"
       stash includes: 'Dockerfile', name: 'dockerfile'
       stash includes: '*.yml', name: 'yaml_files'
+      stash includes: 'amtool', name: 'amtool'
     }
 
     stage('Build') {
       sh "go get github.com/prometheus/alertmanager/cmd/amtool"
       sh "export GOOS=linux make build"
-      stash includes: 'amtool', name: 'amtool'
     }
   }
 
