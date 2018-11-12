@@ -4,7 +4,6 @@ node('common')  {
   def consul_map = [:]
   try {
     def response = httpRequest(contentType: 'APPLICATION_JSON', url: "${CONSUL_URL}")
-    assert false
   } catch (e) {
     assert e in Exception
   }
