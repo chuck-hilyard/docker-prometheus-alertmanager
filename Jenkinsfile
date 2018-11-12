@@ -11,7 +11,7 @@ node('common')  {
   println('Status: '+response.status)
   println('Response: '+response.content)
   def list = response.content.tokenize(",")
-  def i = 1
+  def x = 1
   for (i in list.get(i)) {
     println("element $i") 
   }
