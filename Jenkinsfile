@@ -11,7 +11,7 @@ node('common')  {
     consul_keys[key] == value
   }
 
-  BRANCH = consul_keys.get("branch")
+  //BRANCH = consul_keys.get("branch")
 
   try {
     stage('Code Checkout') {
