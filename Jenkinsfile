@@ -9,6 +9,7 @@ node('common')  {
     key = key.toString().replace("[","").replace("]","").replace("\"", "")
     response = httpRequest(contentType: 'APPLICATION_JSON', url: "http://consul:8500/v1/kv/${key}?raw")
     value = response.content
+    key = key.toString().replace("${PROJECT_NAME}/config/", "")
     consul_keys[key] = value
   }
 
