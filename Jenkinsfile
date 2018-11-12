@@ -28,6 +28,8 @@ node('common')  {
 
 node('docker-builds') {
 
+  FQDN_HYPHENATED = "${consul_keys["FQDN"]}".toString().replace(".","_")
+
   stage('Docker Build') {
 		unstash 'everything'
     sh "docker build -t ${PROJECT_NAME}:${consul_keys["branch"]} ."
