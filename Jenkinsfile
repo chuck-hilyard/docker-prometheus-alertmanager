@@ -4,23 +4,11 @@ node('common')  {
   def response = httpRequest(contentType: 'APPLICATION_JSON', url: "${CONSUL_URL}")
   def consul_key_list = response.content.tokenize(",")
   for (key in consul_key_list) {
-    key = key.toString().replace("[","").replace("]","")
+    key = key.toString().replace("[","").replace("]","").replace(""", "")
     response = httpRequest(contentType: 'APPLICATION_JSON', url: "http://consul:8500/v1/kv/${key}?raw")
     value = response.content()
     println("key:${item}  value:${value}")
   }
-
-  /*
-	*AWS_ACCOUNT_NUMBER = sh(script: "curl http://consul:8500/v1/kv/${PROJECT_NAME}/config/AWS_ACCOUNT_NUMBER?raw", returnStdout: true).trim()
-	*FQDN = sh(script: "curl http://consul:8500/v1/kv/${PROJECT_NAME}/config/FQDN?raw", returnStdout: true).trim()
-	*FQDN_HYPHENATED = FQDN.replace('.', '-')
-	*ENVIRONMENT = sh(script: "curl http://consul:8500/v1/kv/${PROJECT_NAME}/config/ENVIRONMENT?raw", returnStdout: true).trim()
-	*PLATFORM = sh(script: "curl http://consul:8500/v1/kv/${PROJECT_NAME}/config/PLATFORM?raw", returnStdout: true).trim()
-	*PLATFORM_LOWERCASE = PLATFORM.toLowerCase()
-	*BRANCH = sh(script: "curl http://consul:8500/v1/kv/${PROJECT_NAME}/config/branch?raw", returnStdout: true).trim()
-	*REGION = sh(script: "curl http://consul:8500/v1/kv/${PROJECT_NAME}/config/REGION?raw", returnStdout: true).trim()
-  *github_repo = sh(script: "curl http://consul:8500/v1/kv/${PROJECT_NAME}/config/github_repo?raw", returnStdout: true).trim()
-  */
 
   try {
     stage('Code Checkout') {
