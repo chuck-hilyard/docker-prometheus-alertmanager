@@ -1,5 +1,5 @@
 
-@Field Map consul_keys = [:]
+consul_keys = [:]
 
 node('common')  {
 	PROJECT_NAME = 'prometheus-alertmanager'
@@ -13,6 +13,7 @@ node('common')  {
     value = response.content
     consul_keys[key] = value
   }
+  println("consul keys is a "+consul_keys.getClass())
 
   try {
     stage('Code Checkout') {
