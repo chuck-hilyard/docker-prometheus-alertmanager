@@ -30,7 +30,7 @@ node('common')  {
 
 node('docker-builds') {
 
-  FQDN_HYPHENATED = "${consul_keys["FQDN"]}".toString().replace(".","_")
+  FQDN_HYPHENATED = "${consul_keys["FQDN"]}".toString().replace(".","-")
 
   stage('Docker Build') {
 		unstash 'everything'
