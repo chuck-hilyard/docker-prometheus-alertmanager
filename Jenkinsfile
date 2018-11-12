@@ -11,8 +11,6 @@ node('common')  {
     consul_keys[key] == value
   }
 
-  //BRANCH = consul_keys.get("branch")
-
   try {
     stage('Code Checkout') {
       git branch: "${consul_keys["branch"]}"
@@ -32,13 +30,13 @@ node('docker-builds') {
 
   stage('Docker Build') {
 		unstash 'everything'
-    sh "docker build -t ${PROJECT_NAME}:consul_keys.branch ."
-    sh "docker tag ${PROJECT_NAME}:${BRANCH} ${AWS_ACCOUNT_NUMBER}.dkr.ecr.us-west-2.amazonaws.com/${PROJECT_NAME}-${FQDN_HYPHENATED}:${BRANCH}"
+    sh "docker build -t ${PROJECT_NAME}:${consul_keys["branch"]} ."
+    sh "docker tag ${PROJECT_NAME}:${consul_keys["branch"]} ${consul_keys["AWS_ACCOUNT_NUMBER"]}.dkr.ecr.us-west-2.amazonaws.com/${PROJECT_NAME}-${FQDN_HYPHENATED}:${consul_keys["branch"]}"
   }
 
   stage('Docker Deploy') {
-    AWS_LOGIN = sh(script: "aws ecr get-login --region ${REGION} --profile ${ENVIRONMENT}-${PLATFORM_LOWERCASE} --no-include-email", returnStdout: true).trim()
-    sh(script: "echo $AWS_LOGIN |/bin/bash -; docker push ${AWS_ACCOUNT_NUMBER}.dkr.ecr.us-west-2.amazonaws.com/${PROJECT_NAME}-${FQDN_HYPHENATED}:${BRANCH}", returnStdout: true)
+    AWS_LOGIN = sh(script: "aws ecr get-login --region ${consul_keys["REGION"]} --profile ${consul_keys["ENVIRONMENT"]}-${PLATFORM_LOWERCASE} --no-include-email", returnStdout: true).trim()
+    sh(script: "echo $AWS_LOGIN |/bin/bash -; docker push ${consul_keys["AWS_ACCOUNT_NUMBER"]}.dkr.ecr.us-west-2.amazonaws.com/${PROJECT_NAME}-${FQDN_HYPHENATED}:${consul_keys["BRANCH"]}", returnStdout: true)
   }
 }
 
