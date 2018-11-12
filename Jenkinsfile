@@ -5,6 +5,7 @@ node('common')  {
   println('Status: '+response.status)
   println('Response: '+response.content)
   def consul_key_list = response.content.tokenize(",")
+  println("consu key list is"+consul_key_list.Class)
   x = consul_key_list.size()
   i = 0
   for (i in consul_key_list) {
