@@ -13,6 +13,7 @@ node('common')  {
     value = response.content
     consul_keys[key] == value
   }
+  println("consul_keys:"+consul_keys)
 
   try {
     stage('Code Checkout') {
