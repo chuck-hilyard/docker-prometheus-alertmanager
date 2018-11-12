@@ -31,7 +31,7 @@ node('docker-builds') {
 
   stage('Docker Build') {
 		unstash 'everything'
-    sh "docker build -t ${PROJECT_NAME}:${BRANCH} ."
+    sh "docker build -t ${PROJECT_NAME}:consul_keys.branch ."
     sh "docker tag ${PROJECT_NAME}:${BRANCH} ${AWS_ACCOUNT_NUMBER}.dkr.ecr.us-west-2.amazonaws.com/${PROJECT_NAME}-${FQDN_HYPHENATED}:${BRANCH}"
   }
 
