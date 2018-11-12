@@ -5,11 +5,12 @@ node('common')  {
   println('Status: '+response.status)
   println('Response: '+response.content)
   def consul_key_list = response.content.tokenize(",")
-  consul_key_list.join(', ')
+  x = consul_key_list.size()
   // build the k/v
   def consul_map = [:]
-  for (item in consul_key_list) {
-    println("item: $item")
+  i = 0
+  for (i ;x < i; i++) {
+    println("consul_key_list: ${consl_key_list[i]}")
     //response = httpRequest(contentType: 'APPLICATION_JSON', url: "http://consul:8500/v1/kv/${item}")
     //value = response.content()
     //println("key:${item}  value:${value}")
