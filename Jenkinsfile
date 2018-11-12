@@ -15,7 +15,7 @@ node('common')  {
 
   try {
     stage('Code Checkout') {
-      git branch: "${BRANCH}"
+      git branch: "master"
       url: "git@github.com:chuck-hilyard/docker-prometheus-alertmanager.git"
       checkout scm
       stash includes: '**', name: 'everything'
