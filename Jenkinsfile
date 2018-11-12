@@ -6,7 +6,7 @@ node('common')  {
     //def response = httpRequest(contentType: 'APPLICATION_JSON', url: "${CONSUL_URL}")
     response = httpRequest(contentType: 'APPLICATION_JSON', url: "${CONSUL_URL}")
   } catch(e) {
-    assert e in Exception
+    assert e in UnknownHostException
   }
   println('Status: '+response.status)
   println('Response: '+response.content)
