@@ -15,7 +15,7 @@ node('common')  {
 
   try {
     stage('Code Checkout') {
-      git branch: ${BRANCH}
+      git branch: "${BRANCH}"
       url: consul_keys."github_repo"
       checkout scm
       stash includes: '**', name: 'everything'
