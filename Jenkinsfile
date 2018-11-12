@@ -3,7 +3,7 @@ node('common')  {
   CONSUL_URL = "http://consul:8500/v1/kv/${PROJECT_NAME}/config?keys"
   def response = httpRequest(contentType: 'APPLICATION_JSON', url: "${CONSUL_URL}")
   def consul_key_list = response.content.tokenize(",")
-  def consul_key_map [:]
+  def consul_key_map = [:]
   for (key in consul_key_list) {
     key = key.toString().replace("[","").replace("]","").replace("\"", "")
     response = httpRequest(contentType: 'APPLICATION_JSON', url: "http://consul:8500/v1/kv/${key}?raw")
