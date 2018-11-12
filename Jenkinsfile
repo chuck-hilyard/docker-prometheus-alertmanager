@@ -37,7 +37,7 @@ node('docker-builds') {
   }
 
   stage('Docker Deploy') {
-    AWS_LOGIN = sh(script: "aws ecr get-login --region ${consul_keys["REGION"]} --profile ${consul_keys["ENVIRONMENT"]}-${PLATFORM_LOWERCASE} --no-include-email", returnStdout: true).trim()
+    AWS_LOGIN = sh(script: "aws ecr get-login --region ${consul_keys["REGION"]} --profile ${consul_keys["ENVIRONMENT"]}-${consul_keys["PLATFORM"]} --no-include-email", returnStdout: true).trim()
     sh(script: "echo $AWS_LOGIN |/bin/bash -; docker push ${consul_keys["AWS_ACCOUNT_NUMBER"]}.dkr.ecr.us-west-2.amazonaws.com/${PROJECT_NAME}-${FQDN_HYPHENATED}:${consul_keys["BRANCH"]}", returnStdout: true)
   }
 }
