@@ -2,7 +2,12 @@ node('common')  {
 	PROJECT_NAME = 'prometheus-alertmanager'
   CONSUL_URL = "http://consul:8500/v1/kv/${PROJECT_NAME}/config?keys"
   def consul_map = [:]
-  def response = httpRequest(contentType: 'APPLICATION_JSON', url: "${CONSUL_URL}")
+  try {
+    def response = httpRequest(contentType: 'APPLICATION_JSON', url: "${CONSUL_URL}")
+    assert false
+  } catch (e) {
+    assert e in Exception
+  }
   println('Status: '+response.status)
   println('Response: '+response.content)
   def list = response.content.tokenize(",")
