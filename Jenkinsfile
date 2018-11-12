@@ -4,11 +4,11 @@ node('common')  {
   def response = httpRequest(contentType: 'APPLICATION_JSON', url: "${CONSUL_URL}")
   println('Status: '+response.status)
   println('Response: '+response.content)
-  consul_key_list = response.content.tokenize(",")
+  def consul_key_list = response.content.tokenize(",")
   x = consul_key_list.size()
   i = 0
   for (i in consul_key_list) {
-    println(consl_key_list[i])
+    println(consul_key_list[i])
     //response = httpRequest(contentType: 'APPLICATION_JSON', url: "http://consul:8500/v1/kv/${item}")
     //value = response.content()
     //println("key:${item}  value:${value}")
