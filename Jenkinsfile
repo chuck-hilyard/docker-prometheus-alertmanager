@@ -11,7 +11,7 @@ node('common')  {
     key = key.toString().replace("[","").replace("]","").replace("\"", "")
     response = httpRequest(contentType: 'APPLICATION_JSON', url: "http://consul:8500/v1/kv/${key}?raw")
     value = response.content
-    consul_keys.put(key, value)
+    consul_keys[key] = value
   }
 
   try {
