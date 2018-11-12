@@ -3,18 +3,19 @@ node('common')  {
   CONSUL_URL = "http://consul:8500/v1/kv/${PROJECT_NAME}/config?keys"
   def response = httpRequest(contentType: 'APPLICATION_JSON', url: "${CONSUL_URL}")
   def consul_key_list = response.content.tokenize(",")
-  def consul_key_map = [:]
+  def consul_keys = [:]
   for (key in consul_key_list) {
     key = key.toString().replace("[","").replace("]","").replace("\"", "")
     response = httpRequest(contentType: 'APPLICATION_JSON', url: "http://consul:8500/v1/kv/${key}?raw")
     value = response.content
-    println("key:${key.toString().replace("${PROJECT_NAME}/config/","")}  value:${value}")
-    consul_key_map[key] == value
+    //println("key:${key.toString().replace("${PROJECT_NAME}/config/","")}  value:${value}")
+    consul_keys[key] == value
   }
 
   try {
     stage('Code Checkout') {
-      git branch: "${BRANCH}",
+      //git branch: "${BRANCH}",
+      git branch: "${consul_keys[branch]}",
       url: "${github_repo}"
       checkout scm
       stash includes: '**', name: 'everything'
