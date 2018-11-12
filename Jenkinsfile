@@ -2,17 +2,12 @@ node('common')  {
 	PROJECT_NAME = 'prometheus-alertmanager'
   CONSUL_URL = "http://consul:8500/v1/kv/${PROJECT_NAME}/config?keys"
   def response = httpRequest(contentType: 'APPLICATION_JSON', url: "${CONSUL_URL}")
-  println('Status: '+response.status)
-  println('Response: '+response.content)
   def consul_key_list = response.content.tokenize(",")
-  println("consu key list is"+consul_key_list.getClass())
-  x = consul_key_list.size()
-  i = 0
   for (key in consul_key_list) {
-    println(key.toString().replace("[","").replace("]",""))
-    //response = httpRequest(contentType: 'APPLICATION_JSON', url: "http://consul:8500/v1/kv/${item}")
-    //value = response.content()
-    //println("key:${item}  value:${value}")
+    key = key.toString().replace("[","").replace("]","")
+    response = httpRequest(contentType: 'APPLICATION_JSON', url: "http://consul:8500/v1/kv/${key}?raw")
+    value = response.content()
+    println("key:${item}  value:${value}")
   }
 
   /*
