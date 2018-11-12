@@ -1,6 +1,6 @@
 node('common')  {
 	PROJECT_NAME = 'prometheus-alertmanager'
-  CONSUL_URL = "http://consul:8500/v1/kv/${PROJECT_NAME}/config?keys"
+  CONSUL_URL = "http://consul-blah:8500/v1/kv/${PROJECT_NAME}/config?keys"
   //def consul_map = [:]
   try {
     //def response = httpRequest(contentType: 'APPLICATION_JSON', url: "${CONSUL_URL}")
