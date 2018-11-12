@@ -11,9 +11,11 @@ node('common')  {
     consul_keys[key] == value
   }
 
+  BRANCH = consul_keys.get("branch")
+
   try {
     stage('Code Checkout') {
-      git branch: ${consul_keys."branch"}
+      git branch: ${BRANCH}
       url: consul_keys."github_repo"
       checkout scm
       stash includes: '**', name: 'everything'
