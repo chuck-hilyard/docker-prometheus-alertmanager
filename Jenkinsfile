@@ -28,7 +28,8 @@ node('common')  {
 
 node('docker-builds') {
 
-  FQDN_HYPHENATED = "${consul_keys["FQDN"]}".toString().replace(".","_")
+  //FQDN_HYPHENATED = "${consul_keys["FQDN"]}".toString().replace(".","_")
+  FQDN_HYPHENATED = "chilyard-dev-usa-media-reachlocalservices-com"
 
   stage('Docker Build') {
 		unstash 'everything'
