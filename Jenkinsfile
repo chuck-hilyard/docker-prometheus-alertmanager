@@ -6,6 +6,7 @@ node('common')  {
   println('Response: '+response.content)
   //def consul_key_list = response.content.tokenize(",")
   def consul_key_list = response.content.join(', ')
+  println("consul key list"+consul_key_list)
   // build the k/v
   def consul_map = [:]
   for (item in consul_key_list) {
