@@ -4,7 +4,7 @@ node('common')  {
   def response = httpRequest(contentType: 'APPLICATION_JSON', url: "${CONSUL_URL}")
   def consul_key_list = response.content.tokenize(",")
   for (key in consul_key_list) {
-    key = key.toString().replace("[","").replace("]","").replace(""", "")
+    key = key.toString().replace("[","").replace("]","").replace("\"", "")
     response = httpRequest(contentType: 'APPLICATION_JSON', url: "http://consul:8500/v1/kv/${key}?raw")
     value = response.content()
     println("key:${item}  value:${value}")
