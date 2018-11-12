@@ -31,6 +31,17 @@ node('common')  {
 
 node('docker-builds') {
 
+  def CONSUL_URL = "http://consul:8500/v1/kv/${PROJECT_NAME}/config?keys"
+  def response = httpRequest(contentType: 'APPLICATION_JSON', url: "${CONSUL_URL}")
+  def consul_key_list = response.content.tokenize(",")
+  //consul_keys = [:]
+  for (key in consul_key_list) {
+    key = key.toString().replace("[","").replace("]","").replace("\"", "")
+    response = httpRequest(contentType: 'APPLICATION_JSON', url: "http://consul:8500/v1/kv/${key}?raw")
+    value = response.content
+    consul_keys[key] == value
+  }
+
   //FQDN_HYPHENATED = "${consul_keys["FQDN"]}".toString().replace(".","_")
   FQDN_HYPHENATED = "chilyard-dev-usa-media-reachlocalservices-com"
 
