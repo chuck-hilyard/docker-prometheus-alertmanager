@@ -13,8 +13,8 @@ node('common')  {
 
   try {
     stage('Code Checkout') {
-      git branch: consul_keys."branch",
-      url: consul_keys."github_repo",
+      git branch: consul_keys."branch"
+      url: consul_keys."github_repo"
       checkout scm
       stash includes: '**', name: 'everything'
     }
