@@ -8,9 +8,10 @@ node('common')  {
   // build the k/v
   def consul_map = [:]
   for (item in consul_key_list) {
-    response = httpRequest(contentType: 'APPLICATION_JSON', url: "http://consul:8500/v1/kv/${item}")
-    value = response.content()
-    println("key:${item}  value:${value}")
+    println("item: $item[1]")
+    #response = httpRequest(contentType: 'APPLICATION_JSON', url: "http://consul:8500/v1/kv/${item}")
+    #value = response.content()
+    #println("key:${item}  value:${value}")
   }
 
   /*
