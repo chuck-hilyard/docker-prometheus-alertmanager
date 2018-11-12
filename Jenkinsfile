@@ -1,6 +1,4 @@
 
-@Field consul_keys = [:]
-
 node('common')  {
 	PROJECT_NAME = 'prometheus-alertmanager'
   def CONSUL_URL = "http://consul:8500/v1/kv/${PROJECT_NAME}/config?keys"
@@ -27,6 +25,8 @@ node('common')  {
     currentBuild.result = "FAILURE"
   throw err
   }
+
+  println("consul keys: "+consul_keys)
 }
 
 node('docker-builds') {
