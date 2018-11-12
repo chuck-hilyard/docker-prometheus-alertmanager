@@ -16,7 +16,7 @@ node('common')  {
   try {
     stage('Code Checkout') {
       git branch: "${consul_keys["branch"]}"
-      url: "git@github.com:chuck-hilyard/docker-prometheus-alertmanager.git"
+      url: "${consul_keys["github_repo"]}"
       checkout scm
       stash includes: '**', name: 'everything'
     }
