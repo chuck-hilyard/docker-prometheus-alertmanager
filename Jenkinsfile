@@ -10,7 +10,7 @@ node('common')  {
   def consul_map = [:]
   i = 0
   for (i ;x < i; i++) {
-    println("consul_key_list: ${consl_key_list[i]}")
+    println("consul_key_list: consl_key_list[i]")
     //response = httpRequest(contentType: 'APPLICATION_JSON', url: "http://consul:8500/v1/kv/${item}")
     //value = response.content()
     //println("key:${item}  value:${value}")
