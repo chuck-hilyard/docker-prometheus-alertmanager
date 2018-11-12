@@ -11,7 +11,11 @@ node('common')  {
   println('Status: '+response.status)
   println('Response: '+response.content)
   def list = response.content.tokenize(",")
-  println("element 1: "+list.get(1))
+  def i = 1
+  for (i in list.get(i)) {
+    println("element $i") 
+  }
+  //println("element 1: "+list.get(1))
   /*
 	*AWS_ACCOUNT_NUMBER = sh(script: "curl http://consul:8500/v1/kv/${PROJECT_NAME}/config/AWS_ACCOUNT_NUMBER?raw", returnStdout: true).trim()
 	*FQDN = sh(script: "curl http://consul:8500/v1/kv/${PROJECT_NAME}/config/FQDN?raw", returnStdout: true).trim()
