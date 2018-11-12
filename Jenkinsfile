@@ -6,16 +6,13 @@ node('common')  {
   println('Response: '+response.content)
   def consul_key_list = response.content.tokenize(",")
   x = consul_key_list.size()
-  println("x:"+x)
-  // build the k/v
-  def consul_map = [:]
   i = 0
-  //for (i ;x < i; i++) {
- //   println("consul_key_list: consl_key_list[i]")
+  for (i in consul_key_list) {
+    println(consl_key_list[i])
     //response = httpRequest(contentType: 'APPLICATION_JSON', url: "http://consul:8500/v1/kv/${item}")
     //value = response.content()
     //println("key:${item}  value:${value}")
-  //}
+  }
 
   /*
 	*AWS_ACCOUNT_NUMBER = sh(script: "curl http://consul:8500/v1/kv/${PROJECT_NAME}/config/AWS_ACCOUNT_NUMBER?raw", returnStdout: true).trim()
