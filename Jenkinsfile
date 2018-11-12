@@ -1,5 +1,5 @@
 
-consul_keys = [:]
+@Field LinkedHashMap consul_keys = [:]
 
 node('common')  {
 	PROJECT_NAME = 'prometheus-alertmanager'
