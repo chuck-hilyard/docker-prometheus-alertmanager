@@ -26,8 +26,6 @@ node('common')  {
     currentBuild.result = "FAILURE"
   throw err
   }
-
-  println("consul keys: "+consul_keys)
 }
 
 node('docker-builds') {
