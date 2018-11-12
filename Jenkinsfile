@@ -9,7 +9,7 @@ node('common')  {
   x = consul_key_list.size()
   i = 0
   for (key in consul_key_list) {
-    println(toString(key).replace("[","").replace("]",""))
+    println(consul_key_list.toString(key).replace("[","").replace("]",""))
     //response = httpRequest(contentType: 'APPLICATION_JSON', url: "http://consul:8500/v1/kv/${item}")
     //value = response.content()
     //println("key:${item}  value:${value}")
