@@ -5,7 +5,7 @@ node('common')  {
   println('Status: '+response.status)
   println('Response: '+response.content)
   def consul_key_list = response.content.tokenize(",")
-  consul_key_list.replaceAll("\\p{P}","")
+  def consul_key_list.join(', ')
   // build the k/v
   def consul_map = [:]
   for (item in consul_key_list) {
