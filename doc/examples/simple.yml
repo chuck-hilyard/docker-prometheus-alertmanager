@@ -1,7 +1,7 @@
 global:
   # The smarthost and SMTP sender used for mail notifications.
   smtp_smarthost: 'relayhost:25'
-  smtp_from: 'noreploy@reachlocalservices.com'
+  smtp_from: 'alertmanager@reachlocalservices.com'
 
 # The directory from which notification templates are read.
 templates: 
