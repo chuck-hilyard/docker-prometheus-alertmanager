@@ -46,3 +46,8 @@ receivers:
   - to: 'chuck.hilyard@reachlocal.com'
     send_resolved: true
     require_tls: false
+- name: 'rogue-squadron'
+  email_configs:
+  - to: 'RogueSquadron810@gannett.com'
+    send_resolved: true
+    require_tls: false
