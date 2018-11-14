@@ -24,10 +24,10 @@ route:
 
   # If an alert has successfully been sent, wait 'repeat_interval' to
   # resend them.
-  repeat_interval: 1h
+  repeat_interval: 15m
 
   # A default receiver
-  receiver: team-X-mails
+  receiver: media-devops 
 
   # The child route trees.
   routes:
@@ -35,13 +35,18 @@ route:
   # catch alerts that are related to a list of services.
   - match_re:
       service: ^$
-    receiver: team-X-mails
+    receiver: media-devops
     # The service has a sub-route for critical alerts, any alerts
     # that do not match, i.e. severity != critical, fall-back to the
     # parent node and are sent to 'team-X-mails'
 
 receivers:
-- name: 'team-X-mails'
+- name: 'media-devops'
+  email_configs:
+  - to: 'chuck.hilyard@reachlocal.com'
+    send_resolved: true
+    require_tls: false
+- name: 'rogue-squadron'
   email_configs:
   - to: 'chuck.hilyard@reachlocal.com'
     send_resolved: true
